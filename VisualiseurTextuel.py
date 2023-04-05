@@ -1,5 +1,6 @@
 from queue import Queue
 from GUI import GUI
+from ivy.ivy import *
 from ivy.std_api import *
 import threading
 
@@ -40,9 +41,8 @@ class VisualiseurTextuel():
         One important thing to remember is that the thread has to yield
         control.
         """
-
-        IvyInit("Visualiseur Textuel Agent", "Visualiseur Textuel est pret", 0, self.on_connetion_change, self.on_die)
-        IvyStart("127.0.0.1:2010")
+        IvyInit("VisualiseurTextuelAgent", "Visualiseur Textuel est pret", 0, self.on_connetion_change, self.on_die)
+        IvyStart()
         IvyBindMsg(self.addToQueue, "(^AVANCE [1-9][0-9]?$|^AVANCE 100$)")
         IvyBindMsg(self.addToQueue, "(^RECULE [1-9][0-9]?$|^RECULE 100$)")
         IvyBindMsg(self.addToQueue, "(^TOURNEDROITE (?:36[0]|3[0-5][0-9]|[12][0-9][0-9]|[1-9]?[0-9])?$)")
@@ -65,15 +65,15 @@ class VisualiseurTextuel():
 
     def on_connetion_change(agent, event, *args):
         if event == IvyApplicationDisconnected:
-            #info("Ivy application %r has disconnected", agent)
+            # info("Ivy application %r has disconnected", agent)
             print("Ivy application %r has disconnected", agent)
         else:
-            #info("Ivy application %r has connected", agent)
-            #info("Ivy application currently on the bus: %s", ",".join(IvyGetApplicationList()))
+            # info("Ivy application %r has connected", agent)
+            # info("Ivy application currently on the bus: %s", ",".join(IvyGetApplicationList()))
             print("Ivy application %r has connected", agent)
             print("Ivy application currently on the bus: %s", ",".join(IvyGetApplicationList()))
 
     def on_die(agent, id):
-        #info("Received the order to die from %r with id = %d", agent, id)
+        # info("Received the order to die from %r with id = %d", agent, id)
         print("Received the order to die from %r with id = %d", agent, id)
         IvyStop()
