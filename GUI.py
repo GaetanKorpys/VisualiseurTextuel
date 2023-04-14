@@ -69,25 +69,25 @@ class GUI():
 
         elif re.match("^TOURNEDROITE (?:36[0]|3[0-5][0-9]|[12][0-9][0-9]|[1-9]?[0-9])?$", command):
 
-            self.oldStateTurtle.config(text=("Angle initale de la tortue : " + self.turtle.angle))
+            self.oldStateTurtle.config(text=("Angle initale de la tortue : " + str(self.turtle.angle)))
 
             message_parts = args[1].split(" ")
             nb = message_parts[1]
 
             self.turtle.tourne_droite(int(nb))
 
-            self.newStateTurtle.config(text=("Nouvel angle : " + self.turtle.angle))
+            self.newStateTurtle.config(text=("Nouvel angle : " + str(self.turtle.angle)))
 
         elif re.match("^TOURNEGAUCHE (?:36[0]|3[0-5][0-9]|[12][0-9][0-9]|[1-9]?[0-9])?$", command):
 
-            self.oldStateTurtle.config(text=("Angle inital de la tortue : " + self.turtle.angle))
+            self.oldStateTurtle.config(text=("Angle inital de la tortue : " + str(self.turtle.angle)))
 
             message_parts = args[1].split(" ")
             nb = message_parts[1]
 
             self.turtle.tourne_gauche(int(nb))
 
-            self.newStateTurtle.config(text=("Nouvel angle : " + self.turtle.angle))
+            self.newStateTurtle.config(text=("Nouvel angle : " + str(self.turtle.angle)))
 
         elif re.match("^LEVECRAYON$", command):
 
@@ -121,11 +121,11 @@ class GUI():
 
         elif re.match("^RESTAURE", command):
 
-            self.oldStateTurtle.config(text=("Position initale de la tortue : " + self.turtle.getPos() + "Angle initale de la tortue : " + self.turtle.angle))
+            self.oldStateTurtle.config(text=("Position initale de la tortue : " + self.turtle.getPos() + "Angle initale de la tortue : " + str(self.turtle.angle)))
 
             self.turtle.restaure()
 
-            self.newStateTurtle.config(text=("Position initale de la tortue : " + self.turtle.getPos() + "Angle initale de la tortue : " + self.turtle.angle))
+            self.newStateTurtle.config(text=("Position initale de la tortue : " + self.turtle.getPos() + "Angle initale de la tortue : " + str(self.turtle.angle)))
 
         elif re.match("^NETTOIE$", command):
 
@@ -150,11 +150,11 @@ class GUI():
             message_parts = command.split(" ")
             direction = message_parts[1]
 
-            self.oldStateTurtle.config(text=("Angle initial de la tortue : "+self.turtle.angle))
+            self.oldStateTurtle.config(text=("Angle initial de la tortue : "+ str(self.turtle.angle)))
 
             self.turtle.fcap(-int(direction))
 
-            self.newStateTurtle.config(text=("Nouvel angle de la tortue : " + self.turtle.angle))
+            self.newStateTurtle.config(text=("Nouvel angle de la tortue : " + str(self.turtle.angle)))
 
         elif re.match("^FPOS*", command):
 
