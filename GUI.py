@@ -48,7 +48,7 @@ class GUI():
 
         self.orderReceive.config(text=("Ordre reçu : " + str(args)))
 
-        if re.match("^AVANCE [1-9][0-9]?$|^AVANCE 100$", args[1]):
+        if re.match(self.regexCommand.avancerRegex, args[1]):
 
             self.oldStateTurtle.config(text=("Position initale de la tortue : " + self.turtle.getPos()))
 
@@ -61,7 +61,7 @@ class GUI():
 
 
 
-        elif re.match("^RECULE [1-9][0-9]?$|^RECULE 100$", command):
+        elif re.match(self.regexCommand.reculerRegex, command):
 
             self.oldStateTurtle.config(text=("Position initale de la tortue : " + self.turtle.getPos()))
 
@@ -72,7 +72,7 @@ class GUI():
 
             self.newStateTurtle.config(text=("Nouvelle position : " + self.turtle.getPos()))
 
-        elif re.match("^TOURNEDROITE (?:36[0]|3[0-5][0-9]|[12][0-9][0-9]|[1-9]?[0-9])?$", command):
+        elif re.match(self.regexCommand.tourneDroiteRegex, command):
 
             self.oldStateTurtle.config(text=("Angle initale de la tortue : " + str(self.turtle.angle)))
 
@@ -83,7 +83,7 @@ class GUI():
 
             self.newStateTurtle.config(text=("Nouvel angle : " + str(self.turtle.angle)))
 
-        elif re.match("^TOURNEGAUCHE (?:36[0]|3[0-5][0-9]|[12][0-9][0-9]|[1-9]?[0-9])?$", command):
+        elif re.match(self.regexCommand.tourneGaucheRegex, command):
 
             self.oldStateTurtle.config(text=("Angle inital de la tortue : " + str(self.turtle.angle)))
 
@@ -94,7 +94,7 @@ class GUI():
 
             self.newStateTurtle.config(text=("Nouvel angle : " + str(self.turtle.angle)))
 
-        elif re.match("^LEVECRAYON$", command):
+        elif re.match(self.regexCommand.leveCrayonRegex, command):
 
             if self.turtle.crayon_leve :
                 self.oldStateTurtle.config(text="Etat inital du crayon : levé")
@@ -105,7 +105,7 @@ class GUI():
 
             self.newStateTurtle.config(text="Nouvel etat du crayon : levé" )
 
-        elif re.match("^BAISSECRAYON$", command):
+        elif re.match(self.regexCommand.baisseCrayonRegex, command):
 
             if self.turtle.crayon_leve:
                 self.oldStateTurtle.config(text="Etat inital du crayon : levé")
@@ -116,7 +116,7 @@ class GUI():
 
             self.newStateTurtle.config(text="Nouvel etat du crayon : baissé")
 
-        elif re.match("^ORIGINE$", command):
+        elif re.match(self.regexCommand.origineRegex, command):
 
             self.oldStateTurtle.config(text=("Position initale de la tortue : " + self.turtle.getPos()))
 
@@ -124,7 +124,7 @@ class GUI():
 
             self.newStateTurtle.config(text=("Position initale de la tortue : " + self.turtle.getPos()))
 
-        elif re.match("^RESTAURE", command):
+        elif re.match(self.regexCommand.restaureRegex, command):
 
             self.oldStateTurtle.config(text=("Position initale de la tortue : " + self.turtle.getPos() + "Angle initale de la tortue : " + str(self.turtle.angle)))
 
@@ -132,11 +132,11 @@ class GUI():
 
             self.newStateTurtle.config(text=("Position initale de la tortue : " + self.turtle.getPos() + "Angle initale de la tortue : " + str(self.turtle.angle)))
 
-        elif re.match("^NETTOIE$", command):
+        elif re.match(self.regexCommand.nettoieRegex, command):
 
             self.oldStateTurtle.config(text="Rien à nettoyer")
 
-        elif re.match("^FCC (?:1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]) (?:1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]) (?:1?[0-9]{1,2}|2[0-4][0-9]|25[0-5])$", command):
+        elif re.match(self.regexCommand.fccRegex, command):
 
             message_parts = command.split(" ")
 
@@ -144,13 +144,13 @@ class GUI():
             g = int(message_parts[2])
             b = int(message_parts[3])
 
-            self.oldStateTurtle.config(text=("Couleur initale du crayon : " + self.rgbToColor(self.turtle.couleur)))
+            self.oldStateTurtle.config(text=("Couleur initale du crayon : " + "RGB({}, {}, {})".format(self.turtle.couleur[0], self.turtle.couleur[1], self.turtle.couleur[2])))
 
             self.turtle.fcc(r, g, b)
 
-            self.newStateTurtle.config(text=("Nouvelle couleur du crayon : " + self.rgbToColor(self.turtle.couleur)))
+            self.newStateTurtle.config(text=("Nouvelle couleur du crayon : " + "RGB({}, {}, {})".format(self.turtle.couleur[0], self.turtle.couleur[1], self.turtle.couleur[2])))
 
-        elif re.match("^FCAP (?:36[0]|3[0-5][0-9]|[12][0-9][0-9]|[1-9]?[0-9])?$", command):
+        elif re.match(self.regexCommand.fcapRegex, command):
 
             message_parts = command.split(" ")
             direction = message_parts[1]
@@ -161,11 +161,11 @@ class GUI():
 
             self.newStateTurtle.config(text=("Nouvel angle de la tortue : " + str(self.turtle.angle)))
 
-        elif re.match("^FPOS*", command):
+        elif re.match(self.regexCommand.fposRegex, command):
 
-            message_parts = command.split(" ")
-            x = message_parts[1]
-            y = message_parts[2]
+            sous_chaine = command[command.find("[")+1:command.find("]")].split(",")
+            x = sous_chaine[0];
+            y = sous_chaine[1];
 
             self.oldStateTurtle.config(text=("Position initiale de la tortue : " + self.turtle.getPos()))
 
