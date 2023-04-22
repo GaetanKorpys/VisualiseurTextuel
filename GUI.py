@@ -1,10 +1,15 @@
 import tkinter as tk
 from ivy.ivy import *
+
+from RegexCommand import RegexCommand
 from Turtle import Turtle
 
 
 class GUI():
     def __init__(self, master, queue, endCommand):
+
+        # Import regex commands
+        self.regexCommand = RegexCommand()
 
         self.queue = queue
         self.master = master

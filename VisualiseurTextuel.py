@@ -4,9 +4,15 @@ from ivy.ivy import *
 from ivy.std_api import *
 import threading
 
+from RegexCommand import RegexCommand
+
+
 class VisualiseurTextuel():
 
     def __init__(self, master):
+
+        # Import regex commands
+        self.regexCommand = RegexCommand()
 
         self.master = master
         self.queue = Queue()
@@ -43,18 +49,18 @@ class VisualiseurTextuel():
         """
         IvyInit("VisualiseurTextuelAgent", "Visualiseur Textuel est pret", 0, self.on_connetion_change, self.on_die)
         IvyStart()
-        IvyBindMsg(self.addToQueue, "(^AVANCE [1-9][0-9]?$|^AVANCE 100$)")
-        IvyBindMsg(self.addToQueue, "(^RECULE [1-9][0-9]?$|^RECULE 100$)")
-        IvyBindMsg(self.addToQueue, "(^TOURNEDROITE (?:36[0]|3[0-5][0-9]|[12][0-9][0-9]|[1-9]?[0-9])?$)")
-        IvyBindMsg(self.addToQueue, "(^TOURNEGAUCHE (?:36[0]|3[0-5][0-9]|[12][0-9][0-9]|[1-9]?[0-9])?$)")
-        IvyBindMsg(self.addToQueue, "(^LEVECRAYON$)")
-        IvyBindMsg(self.addToQueue, "(^BAISSECRAYON$)")
-        IvyBindMsg(self.addToQueue, "(^ORIGINE$)")
-        IvyBindMsg(self.addToQueue, "(^RESTAURE$)")
-        IvyBindMsg(self.addToQueue, "(^NETTOIE$)")
-        IvyBindMsg(self.addToQueue, "(^FCC (?:1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]) (?:1?[0-9]{1,2}|2[0-4][0-9]|25[0-5]) (?:1?[0-9]{1,2}|2[0-4][0-9]|25[0-5])$)")
-        IvyBindMsg(self.addToQueue, "(^FCAP (?:36[0]|3[0-5][0-9]|[12][0-9][0-9]|[1-9]?[0-9])?$)")
-        IvyBindMsg(self.addToQueue, "(^FPOS.*)")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.avancerRegex + ")")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.reculerRegex + ")")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.tourneDroiteRegex + ")")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.tourneGaucheRegex + ")")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.leveCrayonRegex + ")")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.baisseCrayonRegex + ")")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.origineRegex + ")")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.restaureRegex + ")")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.nettoieRegex + ")")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.fccRegex + ")")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.fcapRegex + ")")
+        IvyBindMsg(self.addToQueue, "(" + self.regexCommand.fposRegex + ")")
 
 
     def endApplication(self):
