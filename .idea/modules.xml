@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Editeur/.idea/Editeur.iml" filepath="$PROJECT_DIR$/../Editeur/.idea/Editeur.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../LigneDeCommande/.idea/LigneDeCommande.iml" filepath="$PROJECT_DIR$/../LigneDeCommande/.idea/LigneDeCommande.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../VisualiseurGraphique/.idea/VisualiseurGraphique.iml" filepath="$PROJECT_DIR$/../VisualiseurGraphique/.idea/VisualiseurGraphique.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/VisualiseurTextuel.iml" filepath="$PROJECT_DIR$/.idea/VisualiseurTextuel.iml" />
     </modules>
   </component>
