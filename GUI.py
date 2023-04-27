@@ -6,8 +6,9 @@ from Turtle import Turtle
 
 
 class GUI():
-    def __init__(self, master, queue, endCommand):
 
+    def __init__(self, master, queue, endCommand):
+        '''Constructeur '''
         # Import regex commands
         self.regexCommand = RegexCommand()
 
@@ -33,9 +34,7 @@ class GUI():
         self.turtle = Turtle(x, y, -90)
 
     def processIncoming(self):
-        """
-        Handle all the messages currently in the queue (if any).
-        """
+        '''Check l'état de la liste et lit les commandes si la liste n'est pas vide '''
         while self.queue.qsize():
             if not self.queue.empty():
                 msg = self.queue.get()
@@ -43,7 +42,7 @@ class GUI():
 
 
     def readCmdFromQueue(self, args):
-
+        ''' Exécute la commande dans la liste '''
         command = args[1]
 
         self.orderReceive.config(text=("Ordre reçu : " + str(args)))
